@@ -1,17 +1,28 @@
-const User = require("../models/User");
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const User = require("../models/User");
+const keys = require("../config/keys");
 
 module.exports.login = async function (req, res) {
   const { email, password } = req.body;
 
   const candidate = await User.findOne({ email });
   if (candidate) {
-    const match = await bcrypt.compare(password, registered.candidate);
+    const match = bcrypt.compareSync(password, candidate.password);
     if (match) {
       // token generating
-      res.status(200).json({ message: "Welcome" });
+      const token = jwt.sign(
+        {
+          email: candidate.email,
+          userId: candidate._id,
+        },
+        keys.jwt,
+        { expiresIn: 60 * 60 }
+      );
+
+      res.status(200).json({ token: `Bearer ${token}` });
     } else {
-      res.status(401).json({ message: "Incorrect password... try again" });// 402 Unauthorized
+      res.status(401).json({ message: "Incorrect password... try again" }); // 402 Unauthorized
     }
   } else {
     res.status(404).json({ message: "User not found, please register" }); // 404 Not found
