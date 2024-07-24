@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -9,15 +10,24 @@ const positionRouter = require("./routes/position");
 const orderRouter = require("./routes/order");
 const categoryRouter = require("./routes/category");
 
+//mongoBD connection
+mongoose
+  .connect(process.env.CONNECTION_STRING)
+  .then(() => {
+    console.log("connected to DB successfully");
+  })
+  .catch((err) => {
+    console.log("DB connection error: ", err);
+  });
+
 //to generate JS object from json
 app.use(bodyParser.json());
 // for encoding
 app.use(bodyParser.urlencoded({ extended: true }));
 // for logs
-app.use(morgan('dev'))
+app.use(morgan("dev"));
 // cors policy
-app.use(cors())
-
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Okey" });
