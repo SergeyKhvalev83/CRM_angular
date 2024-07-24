@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const app = express();
+const passport = require("passport");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
@@ -9,7 +9,7 @@ const analyticsRouter = require("./routes/analytics");
 const positionRouter = require("./routes/position");
 const orderRouter = require("./routes/order");
 const categoryRouter = require("./routes/category");
-
+const app = express();
 //mongoBD connection
 mongoose
   .connect(process.env.CONNECTION_STRING)
@@ -19,6 +19,10 @@ mongoose
   .catch((err) => {
     console.log("DB connection error: ", err);
   });
+
+// use passport to handle tokens
+app.use(passport.initialize())
+require('./middleware/passport')(passport)
 
 //to generate JS object from json
 app.use(bodyParser.json());

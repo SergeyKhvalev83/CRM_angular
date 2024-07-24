@@ -1,5 +1,5 @@
 module.exports.getAll = function (req, res) {
-  res.status(200).json({ category: "GENERAL GET" });
+  res.status(200).json({ category: "GET ALL CATEGORIES" });
 };
 
 module.exports.getByIdGet = function (req, res) {

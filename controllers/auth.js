@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const keys = require("../config/keys");
+const errorHandler = require("../utils/errorHandler");
 
 module.exports.login = async function (req, res) {
   const { email, password } = req.body;
@@ -46,8 +47,7 @@ module.exports.register = async function (req, res) {
       await user.save();
       res.status(201).json(user);
     } catch (error) {
-      console.log("Error during saving new user to DB: ", user);
-      res.status(500).json({ message: "Error during saving new user to DB" });
+      errorHandler(res, error);
     }
   }
 };
