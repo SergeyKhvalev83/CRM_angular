@@ -22,7 +22,7 @@ mongoose
 
 // use passport to handle tokens
 app.use(passport.initialize())
-require('./middleware/passport')(passport)
+require('./middleware/passport')(passport)// that require return function which we invoke immediatly with pasport as parameter
 
 //to generate JS object from json
 app.use(bodyParser.json());

@@ -8,10 +8,11 @@ router.get("/", passport.authenticate("jwt", {session: false}
 
 router.get("/:id", controller.getByIdGet);
 
-router.delete("/:id", controller.remove);
 
 router.post("/", controller.create);
 
 router.patch("/:id", controller.update);
+router.delete("/:id", controller.remove);
+
 
 module.exports = router;
