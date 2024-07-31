@@ -23,13 +23,17 @@ mongoose
 // use passport to handle tokens
 app.use(passport.initialize())
 require('./middleware/passport')(passport)// that require return function which we invoke immediatly with pasport as parameter
-
+// get direct access to uploads as static asset
+app.use('/uploads', express.static('uploads'))
 //to generate JS object from json
 app.use(bodyParser.json());
 // for encoding
 app.use(bodyParser.urlencoded({ extended: true }));
 // for logs
 app.use(morgan("dev"));
+
+
+
 // cors policy
 app.use(cors());
 

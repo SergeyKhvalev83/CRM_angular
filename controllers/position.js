@@ -16,13 +16,13 @@ module.exports.getByCategoryId = async function (req, res) {
 
 module.exports.create = async function (req, res) {
   try {
-    const position = await new Position.create({
+    const position = await new Position({
       name: req.body.name,
       cost: req.body.cost,
       category: req.body.category,
       user: req.user.id,
     }).save();
-    rew.status(201).json(position);
+    res.status(201).json(position);
   } catch (error) {
     errorHandler(res, e);
   }
@@ -49,3 +49,5 @@ module.exports.update = async function (req, res) {
     errorHandler(res, e);
   }
 };
+
+

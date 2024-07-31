@@ -6,6 +6,7 @@ const errorHandler = require("../utils/errorHandler");
 
 module.exports.login = async function (req, res) {
   const { email, password } = req.body;
+  console.log("USER LOG IN!!!!!!!!!");
 
   const candidate = await User.findOne({ email });
   if (candidate) {

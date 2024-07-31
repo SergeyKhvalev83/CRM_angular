@@ -12,7 +12,8 @@ const categorySchema = new Schema({
   },
   user: {
     ref: 'users', // it will be referens on another collection
-    type: Schema.types.ObjectId, // so we will store user id
+    type: Schema.Types.ObjectId,
+    // so we will store user id
   },
 });
 
