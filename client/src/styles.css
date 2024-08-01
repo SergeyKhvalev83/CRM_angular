@@ -1,0 +1,6 @@
+/*
+to use materialize-css styles
+@import "~materialize-css/dist/css/materialize.min.css";
+*/
+@import "../node_modules/materialize-css/dist/css/materialize.min.css";
+@import "theme/styles.min.css";
