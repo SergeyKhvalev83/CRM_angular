@@ -1,7 +1,18 @@
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, Routes } from '@angular/router';
+// import { routes } from './app.routes';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { RegistrationPageComponent } from './registration-page/registration-page.component';
 
-import { routes } from './app.routes';
+
+export const routes: Routes = [
+  { path: 'login', component: LoginPageComponent },
+
+  {
+    path: 'registration',
+    component: RegistrationPageComponent,
+  },
+];
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes)]
